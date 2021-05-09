@@ -1,0 +1,36 @@
+version: "3.4"
+services:
+
+  php:
+    build: ./docker/php
+    restart: always
+    depends_on:
+      - db
+    volumes:
+      - ./app:/nette-skeleton
+      - ./docker/php/php.ini:/usr/local/etc/php/conf.d/base-php.ini
+    expose:
+      - 9000
+
+  db:
+    image: mariadb:10.2.26
+    restart: always
+    environment:
+      MYSQL_DATABASE: nette-skeleton
+      MYSQL_ROOT_PASSWORD: toor
+      MYSQL_USER: user
+      MYSQL_PASSWORD: password
+      TZ: Europe/Prague
+    ports:
+      - '3307:3306'
+
+  web:
+    image: nginx:mainline-alpine
+    restart: always
+    depends_on:
+      - php
+    volumes:
+      - ./app:/nette-skeleton
+      - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
+    ports:
+      - '90:80'
