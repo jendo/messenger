@@ -16,6 +16,10 @@ RUN docker-php-ext-install intl
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install opcache
 
+# xdebug
+RUN pecl install xdebug-2.9.8 && \
+    docker-php-ext-enable xdebug
+
 RUN mkdir -p /messenger
 RUN chown -R www-data:www-data /messenger
 
