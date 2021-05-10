@@ -16,8 +16,8 @@ RUN docker-php-ext-install intl
 RUN docker-php-ext-install pdo_mysql
 RUN docker-php-ext-install opcache
 
-RUN mkdir -p /nette-skeleton
-RUN chown -R www-data:www-data /nette-skeleton
+RUN mkdir -p /messenger
+RUN chown -R www-data:www-data /messenger
 
 ARG COMPOSER_VERSION=1.10.10
 ARG COMPOSER_SHA256=8f16aa77b1236ed40855d8d141c0a939d108a939c8e73f9f32eadd3f05f181b9
@@ -27,4 +27,4 @@ RUN mkdir -p /usr/local/bin && \
     chmod +x /usr/local/bin/composer && \
     chown www-data:www-data /usr/local/bin/composer
 
-WORKDIR /nette-skeleton
+WORKDIR /messenger

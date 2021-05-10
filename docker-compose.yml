@@ -7,7 +7,7 @@ services:
     depends_on:
       - db
     volumes:
-      - ./project:/nette-skeleton
+      - ./project:/messenger
       - ./docker/php/php.ini:/usr/local/etc/php/conf.d/base-php.ini
     expose:
       - 9000
@@ -16,7 +16,7 @@ services:
     image: mariadb:10.2.26
     restart: always
     environment:
-      MYSQL_DATABASE: nette-skeleton
+      MYSQL_DATABASE: messenger
       MYSQL_ROOT_PASSWORD: toor
       MYSQL_USER: user
       MYSQL_PASSWORD: password
@@ -30,7 +30,7 @@ services:
     depends_on:
       - php
     volumes:
-      - ./project:/nette-skeleton
+      - ./project:/messenger
       - ./docker/nginx/nginx.conf:/etc/nginx/conf.d/default.conf
     ports:
       - '90:80'
