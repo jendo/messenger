@@ -10,7 +10,9 @@ RUN \
 
 RUN apt-get update && \
     apt-get install -y --no-install-recommends \
-    libicu-dev wget zip unzip vim curl git
+    libicu-dev wget zip unzip vim curl git \
+    librabbitmq-dev \
+    libssh-dev
 
 RUN docker-php-ext-install intl
 RUN docker-php-ext-install pdo_mysql
@@ -19,6 +21,9 @@ RUN docker-php-ext-install opcache
 # xdebug
 RUN pecl install xdebug-2.9.8 && \
     docker-php-ext-enable xdebug
+
+RUN pecl install amqp && \
+    docker-php-ext-enable amqp
 
 RUN mkdir -p /messenger
 RUN chown -R www-data:www-data /messenger
