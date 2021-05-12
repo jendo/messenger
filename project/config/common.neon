@@ -20,6 +20,7 @@ services:
 	- App\Router\RouterFactory::createRouter
 	- App\Messenger\MessageHandler\SmsNotificationHandler
 	- App\Messenger\MessageBus(@messenger.default.bus)
+	- Symfony\Component\Console\Application
 
 extensions:
 	messenger: Fmasa\Messenger\DI\MessengerExtension
