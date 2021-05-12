@@ -19,6 +19,11 @@ di:
 services:
 	- App\Router\RouterFactory::createRouter
 	- App\Messenger\MessageHandler\SmsNotificationHandler
+	- App\Messenger\MessageBus(@messenger.default.bus)
 
 extensions:
 	messenger: Fmasa\Messenger\DI\MessengerExtension
+
+messenger:
+	buses:
+		default:
