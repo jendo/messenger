@@ -19,3 +19,6 @@ di:
 
 services:
 	- App\Router\RouterFactory::createRouter
+
+extensions:
+	messenger: Fmasa\Messenger\DI\MessengerExtension
