@@ -27,3 +27,5 @@ extensions:
 messenger:
 	buses:
 		default:
+	transports:
+		amqpTransportWithSmsQueue: "amqp://guest:guest@rabbit:5672/%2f/sms"
