@@ -29,3 +29,5 @@ messenger:
 		default:
 	transports:
 		amqpTransportWithSmsQueue: "amqp://guest:guest@rabbit:5672/%2f/sms"
+	routing:
+		'App\Messenger\Message\SmsNotification': amqpTransportWithSmsQueue
