@@ -21,13 +21,18 @@ services:
 	- App\Messenger\MessageHandler\SmsNotificationHandler
 	- App\Messenger\MessageBus(@messenger.default.bus)
 	- Symfony\Component\Console\Application
-
+	-
+		class: Symfony\Component\Messenger\Retry\MultiplierRetryStrategy
+		tags:
+			messenger.retryStrategy: amqpTransportWithSmsQueue
 extensions:
 	messenger: Fmasa\Messenger\DI\MessengerExtension
 
 messenger:
 	buses:
 		default:
+			middleware:
+				- Symfony\Component\Messenger\Middleware\AddBusNameStampMiddleware('default')
 	transports:
 		amqpTransportWithSmsQueue: "amqp://guest:guest@rabbit:5672/%2f/sms"
 	routing:
