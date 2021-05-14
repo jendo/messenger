@@ -22,11 +22,22 @@ services:
 	- App\Messenger\MessageBus(@messenger.default.bus)
 	- Symfony\Component\Console\Application
 	-
+		class: App\Messenger\Subscriber\ConnectionResetterSubscriber
+		tags: [messenger.eventDispatcher.subscriber]
+	-
+		class: App\Messenger\Subscriber\MessageFailedSubscriber
+		tags: [messenger.eventDispatcher.subscriber]
+	-
+		class: App\Messenger\Subscriber\WorkerShutdownSubscriber
+		tags: [messenger.eventDispatcher.subscriber]
+	-
 		class: Symfony\Component\Messenger\Retry\MultiplierRetryStrategy
 		tags:
 			messenger.retryStrategy: amqpTransportWithSmsQueue
+
 extensions:
 	messenger: Fmasa\Messenger\DI\MessengerExtension
+	messengerEventDispatcher: App\Messenger\Extension\MessengerEventDispatcherExtension
 
 messenger:
 	buses:
